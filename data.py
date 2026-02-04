@@ -1,27 +1,57 @@
 import pandas as pd
 import numpy as np
+from datetime import datetime
 
-np.random.seed(42)
+START_DATE = "2024-01-01"
+NUM_DAYS = 120
+NUM_CUSTOMERS = 20
+MAX_TXNS_PER_DAY = 4
 
-dates = pd.date_range("2024-01-01", periods=120, freq="D")
-customers = [f"CUST_{i:03d}" for i in range(1, 21)]
+MEAN_REVENUE = 500
+STD_REVENUE = 150
+
+NEGATIVE_PROB = 0.05   # refund/error probability
+MISSING_PROB = 0.05    # missing value probability
+
+CSV_PATH = "revenue_transactions.csv"
+XLSX_PATH = "revenue_transactions.xlsx"
+
+np.random.seed(int(datetime.now().timestamp()))
+
+# ----------------------------------
+# DATA GENERATION
+# ----------------------------------
+
+dates = pd.date_range(START_DATE, periods=NUM_DAYS, freq="D")
+customers = [f"CUST_{i:03d}" for i in range(1, NUM_CUSTOMERS + 1)]
 
 data = []
-for d in dates:
-    for c in np.random.choice(customers, size=np.random.randint(1, 5)):
-        revenue = np.random.normal(500, 150)
-        if np.random.rand() < 0.05:
-            revenue = -abs(revenue)  # error data
-        if np.random.rand() < 0.05:
-            revenue = None  # missing value
-        data.append([c, d, revenue])
 
-df = pd.DataFrame(data, columns=["customer_id", "transaction_date", "revenue"])
+for date in dates:
+    num_txns = np.random.randint(1, MAX_TXNS_PER_DAY + 1)
+    chosen_customers = np.random.choice(customers, size=num_txns, replace=False)
 
-csv_path = "revenue_transactions.csv"
-xlsx_path = "revenue_transactions.xlsx"
+    for cust in chosen_customers:
+        revenue = np.random.normal(MEAN_REVENUE, STD_REVENUE)
 
-df.to_csv(csv_path, index=False)
-df.to_excel(xlsx_path, index=False)
+        # Inject error cases
+        if np.random.rand() < NEGATIVE_PROB:
+            revenue = -abs(revenue)
 
-csv_path, xlsx_path
+        if np.random.rand() < MISSING_PROB:
+            revenue = None
+
+        data.append([cust, date, revenue])
+
+
+df = pd.DataFrame(
+    data,
+    columns=["customer_id", "transaction_date", "revenue"]
+)
+
+df.to_csv(CSV_PATH, index=False)
+df.to_excel(XLSX_PATH, index=False)
+
+print("Dataset generated successfully:")
+print(f"- {CSV_PATH}")
+print(f"- {XLSX_PATH}")
