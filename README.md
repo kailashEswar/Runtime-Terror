@@ -33,6 +33,7 @@ This hybrid approach improves robustness and stability, especially when revenue 
 ## 🗂️ Dataset Description
 
 The dataset contains historical daily revenue records with the following columns:
+- `customer ID` : Customer of that day
 - `date`: Date of observation
 - `revenue`: Revenue value for that day
 
