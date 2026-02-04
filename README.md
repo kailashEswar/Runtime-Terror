@@ -138,19 +138,7 @@ Instead of selecting a single model, predictions from ARIMA and the ML model are
 2. Compute error metrics (RMSE or MAE) for each model.
 3. Assign weights inversely proportional to their errors:
 
-
-### 6. Training, Testing, and Forecasting Strategy
-
-- The dataset is split using a **time-based split**:
-- Training set: All data except the last 30 days
-- Test set: Last 30 days
-- Models are trained on the training set.
-- Performance is evaluated on the test set using:
-- **RMSE (Root Mean Squared Error)**
-- **MAE (Mean Absolute Error)**
-- After evaluation, models are retrained on the full dataset to forecast the next 30 days.
-
----
+----
 
 ## 📊 Visualization and User Interface
 
