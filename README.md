@@ -150,6 +150,7 @@ An interactive dashboard is built using **Streamlit** to:
 
 This makes the results easy to interpret for both technical and non-technical users.
 
+----
 
 ## 🏗️ Project Structure
 
