@@ -2,6 +2,10 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
+# ----------------------------------
+# CONFIGURATION (EDIT IF NEEDED)
+# ----------------------------------
+
 START_DATE = "2024-01-01"
 NUM_DAYS = 120
 NUM_CUSTOMERS = 20
@@ -16,6 +20,10 @@ MISSING_PROB = 0.05    # missing value probability
 CSV_PATH = "revenue_transactions.csv"
 XLSX_PATH = "revenue_transactions.xlsx"
 
+# ----------------------------------
+# OPTIONAL: RANDOM SEED PER RUN
+# ----------------------------------
+# Comment this line if you want completely uncontrolled randomness
 np.random.seed(int(datetime.now().timestamp()))
 
 # ----------------------------------
@@ -43,11 +51,18 @@ for date in dates:
 
         data.append([cust, date, revenue])
 
+# ----------------------------------
+# CREATE DATAFRAME
+# ----------------------------------
 
 df = pd.DataFrame(
     data,
     columns=["customer_id", "transaction_date", "revenue"]
 )
+
+# ----------------------------------
+# SAVE FILES
+# ----------------------------------
 
 df.to_csv(CSV_PATH, index=False)
 df.to_excel(XLSX_PATH, index=False)
