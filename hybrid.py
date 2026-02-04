@@ -124,14 +124,20 @@ hybrid_wmape = wmape(actual_values, hybrid_forecast)
 
 
 print("\n===== Adaptive Hybrid Forecasting Results =====")
-print(f"ARIMA  → MAE: {arima_mae:.2f}, RMSE: {arima_rmse:.2f}, "
-      f"MAPE: {arima_mape:.2f}%, wMAPE: {arima_wmape:.2f}%")
+print(
+    f"ARIMA  -> MAE: {arima_mae:.2f}, RMSE: {arima_rmse:.2f}, "
+    f"MAPE: {arima_mape:.2f}%, wMAPE: {arima_wmape:.2f}%"
+)
 
-print(f"ML     → MAE: {ml_mae:.2f}, RMSE: {ml_rmse:.2f}, "
-      f"MAPE: {ml_mape:.2f}%, wMAPE: {ml_wmape:.2f}%")
+print(
+    f"ML     -> MAE: {ml_mae:.2f}, RMSE: {ml_rmse:.2f}, "
+    f"MAPE: {ml_mape:.2f}%, wMAPE: {ml_wmape:.2f}%"
+)
 
-print(f"Hybrid → MAE: {hybrid_mae:.2f}, RMSE: {hybrid_rmse:.2f}, "
-      f"MAPE: {hybrid_mape:.2f}%, wMAPE: {hybrid_wmape:.2f}%")
+print(
+    f"Hybrid -> MAE: {hybrid_mae:.2f}, RMSE: {hybrid_rmse:.2f}, "
+    f"MAPE: {hybrid_mape:.2f}%, wMAPE: {hybrid_wmape:.2f}%"
+)
 
 print("\nModel Weights:")
 print(f"Weight (ARIMA): {w_arima:.2f}")
